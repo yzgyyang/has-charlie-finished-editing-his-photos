@@ -17,8 +17,9 @@ MOCK_DATA = [{'id': 4699285, 'name': 'Photography Ideas',
 
 @app.route('/')
 def index():
+    columns = get_columns()
     return render_template("index.html",
-                           columns=get_columns())
+                           columns=columns)
 
 
 def get_columns():
@@ -29,7 +30,7 @@ def get_columns():
 
     for column in columns:
         column['cards'] = [{'id': x['id'],
-                            'note': x['note'],
+                            'note': x['title'],
                             'updated_at': x['updated_at']}
                            for x in
                            gh("projects/columns/{}/cards".format(column['id']))]
