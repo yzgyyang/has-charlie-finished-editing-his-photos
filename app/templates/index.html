@@ -48,7 +48,7 @@
 
 <body class="main-bg">
     <nav class="navbar navbar-expand-lg navbar-dark main-header">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Charlie's Photography</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -64,6 +64,22 @@
     </nav>
     <div class="container">
         <div class="row">
+            <div class="jumbotron">
+                <h1 class="display-4">Hello visitor!</h1>
+                <p class="lead">Welcome to Charlie's Photography Tracker!
+                    As a photographer, he has a lot of ideas and limited time.
+                    As a programmer, I decided to make him a Kanban Board to track his progress.
+                </p>
+                <hr class="my-4">
+                <p class="lead">
+                    Join us in tracking his progress! 
+                </p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="https://www.instagram.com/yzgyyang/" target="_blank">See the photos!</a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
             {% for column in columns %}
             <div class="col-lg-3">
                 <div class="secondary-bg">
@@ -77,6 +93,8 @@
                         <div class="card-body">
                             <p class="card-text-small">{{ card.note }}</p>
                             {% for label in card.labels %}
+                            <span class="badge badge-secondary"
+                                style="background-color: {{ label.color }};">{{ label.name }}</span>
                             {% endfor %}
                         </div>
                     </div>
