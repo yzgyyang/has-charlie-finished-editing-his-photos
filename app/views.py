@@ -29,19 +29,30 @@ def get_columns():
                gh('projects/{}/columns'.format(app.config['GITHUB_PROJECT']))]
 
     for column in columns:
-        column['cards'] = [{'id': x['id'],
-                            'note': x['title'],
-                            'updated_at': x['updated_at']}
-                           for x in
-                           gh("projects/columns/{}/cards".format(column['id']))]
+        column['cards'] = []
+        for card_info in gh('projects/columns/{}/cards'.format(column['id'])):
+            card = {'id': card_info['id'],
+                    'updated_at': card_info['updated_at']}
+            # Get issue info related to card
+            issue_endpoint = card_info['content_url']
+            issue = gh(issue_endpoint, full=True)
+            card['note'] = issue['title']
+            labels = [{'name': x['name'],
+                       'color': x['color']}
+                      for x in issue['labels']]
+            card['labels'] = labels
+
+            column['cards'].append(card)
 
     return columns
 
 
-def gh(endpoint):
+def gh(endpoint, full=False):
+    if not full:
+        endpoint = 'https://api.github.com/{}'.format(endpoint)
     headers = {
         'Accept': 'application/vnd.github.inertia-preview+json',
         'Authorization': 'token {}'.format(app.config['GITHUB_TOKEN']),
     }
-    res = requests.get('https://api.github.com/{}'.format(endpoint), headers=headers)
+    res = requests.get(endpoint, headers=headers)
     return res.json()
