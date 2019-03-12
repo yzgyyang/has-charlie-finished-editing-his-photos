@@ -1,3 +1,91 @@
-{% for column in columns %}
-  <li><{{ column }}</li>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .main-bg {
+            background-color: #F5F5F6
+        }
+
+        .secondary-bg {
+            background-color: #E1E2E1;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .main-header {
+            background-color: #3d5afe
+        }
+
+        .card.spaced {
+            margin-bottom: 10px;
+        }
+
+        .card-text-small {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .card-text-tiny {
+            font-size: 0.7rem;
+            margin: 0;
+            margin-top: 10px;
+        }
+
+        .card.spaced .card-body {
+            padding: 10px;
+        }
+
+        .card.spaced:nth-last-child(1) {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body class="main-bg">
+    <nav class="navbar navbar-expand-lg navbar-dark main-header">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            {% for column in columns %}
+            <div class="col-lg-3">
+                <div class="secondary-bg">
+                    <div style="margin: 15px;">
+                        <div>
+                            <h5 class="card-title">{{ column.name }}</h5>
+                        </div>
+                    </div>
+                    {% for card in column.cards %}
+                    <div class="card spaced">
+                        <div class="card-body">
+                            <p class="card-text-small">{{ card.note }}</p>
+                            {% for label in card.labels %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
