@@ -4,6 +4,17 @@ from app import app
 from flask import render_template
 
 
+MOCK_DATA = [{'id': 4699285, 'name': 'Photography Ideas',
+              'cards': [{'id': 18688660, 'note': 'Test Note 1', 'updated_at': '2019-03-12T04:31:59Z'}]},
+             {'id': 4699287, 'name': 'Shooting Finished',
+              'cards': [{'id': 18688669, 'note': 'Test Note 2', 'updated_at': '2019-03-12T04:32:08Z'}]},
+             {'id': 4699286, 'name': 'Editing In progress',
+              'cards': [{'id': 18688672, 'note': 'Test Note 3', 'updated_at': '2019-03-12T04:32:13Z'}]},
+             {'id': 4700591, 'name': 'Ready for Publish',
+              'cards': [{'id': 18688676, 'note': 'Test Note 5', 'updated_at': '2019-03-12T04:32:24Z'},
+                        {'id': 18688674, 'note': 'Test Note 4', 'updated_at': '2019-03-12T04:32:19Z'}]}]
+
+
 @app.route('/')
 def index():
     return render_template("index.html",
