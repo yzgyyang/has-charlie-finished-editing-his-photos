@@ -1,11 +1,13 @@
 import requests
 
 from app import app
+from flask import render_template
 
 
 @app.route('/')
 def index():
-    return 'Hello World!', 200
+    return render_template("index.html",
+                           columns=get_columns())
 
 
 def get_columns():
